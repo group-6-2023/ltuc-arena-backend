@@ -1,4 +1,6 @@
 const axios = require("axios");
+const { handleServerError } = require('./handle-Error-func');
+
 
 const getExerciseListByEquipment = (req, res) => {
   try {
@@ -16,7 +18,9 @@ const getExerciseListByEquipment = (req, res) => {
       const data = response.data;
       res.send(data);
     });
-  } catch (error) {}
+  } catch (error) {
+    handleServerError(error, req, res);
+  }
 };
 
 module.exports = {

@@ -1,4 +1,6 @@
 const pg = require("pg");
+const { handleServerError } = require('./handle-Error-func');
+
 
 const client = new pg.Client(process.env.DATABASE_URL);
 
@@ -22,8 +24,8 @@ const getExerciseForOneUser = (req, res) => {
           console.log(err.message);
         });
     })
-    .catch((err) => {
-      console.log(err.message);
+    .catch((error) => {
+      handleServerError(error, req, res);
     });
 };
 
