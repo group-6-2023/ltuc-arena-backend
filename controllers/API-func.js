@@ -2,6 +2,7 @@ const axios = require("axios");
 const { handleServerError } = require('./handle-Error-func');
 
 
+
 const getExerciseListByEquipment = (req, res) => {
   try {
     const equipment = req.params.equipment;
@@ -22,7 +23,6 @@ const getExerciseListByEquipment = (req, res) => {
     handleServerError(error, req, res);
   }
 };
-
 
 const getExerciseListByTargetMuscle = (req, res) => {
   try {
@@ -45,8 +45,6 @@ const getExerciseListByTargetMuscle = (req, res) => {
   }
 };
 
-
-
 const getAllExercises = (req, res) => {
 
   try {
@@ -67,9 +65,6 @@ const getAllExercises = (req, res) => {
     handleServerError(error, req, res);
   }
 };
-
-
-
 
 const getExercisesByPart = (req, res) => {
   try {
