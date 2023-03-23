@@ -1,11 +1,16 @@
 "use strict";
 const express = require("express");
 const cors = require("cors");
-const pg = require("pg");
 require("dotenv").config();
-const server = express();
+
+const {
+  client,
+  getExerciseForOneUser,
+} = require("./controllers/database-func");
+const { getExerciseListByEquipment } = require("./controllers/API-func");
+
 const PORT = process.env.PORT || 5000;
-const client = new pg.Client(process.env.DATABASE_URL);
+const server = express();
 
 server.use(cors());
 server.use(express.json());
@@ -13,6 +18,12 @@ server.use(express.json());
 server.get("/", (req, res) => {
   res.send("hello world");
 });
+
+/////////////////// API routes //////////////////
+server.get("/exerciseByEquipment/:equipment", getExerciseListByEquipment);
+
+////////////////// DATABASE routes ///////////////////
+server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
 
 client.connect().then(() => {
   server.listen(PORT, () => {
