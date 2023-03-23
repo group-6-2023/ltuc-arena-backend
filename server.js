@@ -7,7 +7,12 @@ const {
   client,
   getExerciseForOneUser,
 } = require("./controllers/database-func");
-const { getExerciseListByEquipment } = require("./controllers/API-func");
+
+const {
+  getExerciseListByEquipment,
+  getExerciseListByTargetMuscle,
+} = require("./controllers/API-func");
+
 const {
   handleServerError,
   handlePageNotFoundError,
@@ -25,6 +30,7 @@ server.get("/", (req, res) => {
 
 /////////////////// API routes //////////////////
 server.get("/exerciseByEquipment/:equipment", getExerciseListByEquipment);
+server.get("/exerciseByTargetMuscle/:targetMuscle", getExerciseListByTargetMuscle);
 
 ////////////////// DATABASE routes ///////////////////
 server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
@@ -40,6 +46,6 @@ client
       console.log(`Port ${PORT} is ready.`);
     });
   })
-  .catch((err) => {
+  .catch((error) => {
     handleServerError(error, req, res);
   });
