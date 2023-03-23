@@ -6,11 +6,14 @@ require("dotenv").config();
 const {
   client,
   getExerciseForOneUser,
+  addExercise,
 } = require("./controllers/database-func");
 
 const {
   getExerciseListByEquipment,
   getExerciseListByTargetMuscle,
+  getAllExercises,
+  getExercisesByPart,
 } = require("./controllers/API-func");
 
 const {
@@ -33,11 +36,16 @@ server.get("/exerciseByEquipment/:equipment", getExerciseListByEquipment);
 server.get("/exerciseByTargetMuscle/:targetMuscle", getExerciseListByTargetMuscle);
 server.get("/allExercises", getAllExercises);
 server.get("/allExercisesByBodypart/:bodypart", getExercisesByPart)
+
 ///////////////// DATABASE routes ///////////////////
 server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
+server.post("/addExerciseForOneUser/:email", addExercise);
+
 ///////// error handling middleware to the server//////////////////
 server.use(handleServerError);
 server.use(handlePageNotFoundError);
+
+
 
 client
   .connect()
