@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS userExercise;
 
 CREATE TABLE IF NOT EXISTS userExercise (
     exerciseid SERIAL PRIMARY KEY,
-    userid INT,
+    userid VARCHAR(10000),
     exerciseName VARCHAR(255),
     gifUrl VARCHAR(10000),
     bodyPart VARCHAR(10000),
