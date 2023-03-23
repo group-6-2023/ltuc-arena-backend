@@ -31,10 +31,10 @@ server.get("/", (req, res) => {
 /////////////////// API routes //////////////////
 server.get("/exerciseByEquipment/:equipment", getExerciseListByEquipment);
 server.get("/exerciseByTargetMuscle/:targetMuscle", getExerciseListByTargetMuscle);
-
-////////////////// DATABASE routes ///////////////////
+server.get("/allExercises", getAllExercises);
+server.get("/allExercisesByBodypart/:bodypart", getExercisesByPart)
+///////////////// DATABASE routes ///////////////////
 server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
-
 ///////// error handling middleware to the server//////////////////
 server.use(handleServerError);
 server.use(handlePageNotFoundError);
