@@ -23,7 +23,7 @@ const getAllExercises= (req, res) => {
     }
 };
 
-
+  
 
 
 const getExercisesByPart =  (req, res) => {
