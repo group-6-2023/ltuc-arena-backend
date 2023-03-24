@@ -15,7 +15,7 @@ const {
   getExerciseListByTargetMuscle,
   getAllExercises,
   getExercisesByPart,
-  getBodypart,
+  getBodyPartList,
 } = require("./controllers/API-func");
 
 const {
@@ -35,10 +35,13 @@ server.get("/", (req, res) => {
 
 /////////////////// API routes //////////////////
 server.get("/exerciseByEquipment/:equipment", getExerciseListByEquipment);
-server.get("/exerciseByTargetMuscle/:targetMuscle", getExerciseListByTargetMuscle);
+server.get(
+  "/exerciseByTargetMuscle/:targetMuscle",
+  getExerciseListByTargetMuscle
+);
 server.get("/allExercises", getAllExercises);
-server.get("/allExercisesByBodypart/:bodypart", getExercisesByPart)
-server.get("/allBodypart",getBodypart)
+server.get("/allExercisesByBodypart/:bodypart", getExercisesByPart);
+server.get("/allBodypart", getBodyPartList);
 
 ///////////////// DATABASE routes ///////////////////
 server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
@@ -47,8 +50,6 @@ server.post("/infoForOneUser", addInfo);
 ///////// error handling middleware to the server//////////////////
 server.use(handleServerError);
 server.use(handlePageNotFoundError);
-
-
 
 client
   .connect()
