@@ -95,11 +95,33 @@ const getExercisesByPart = (req, res) => {
   }
 };
 
+const getBodypart = (req, res) => {
+
+  try {
+    const options = {
+      method: 'GET',
+      url: 'https://exercisedb.p.rapidapi.com/bodypart',
+      headers: {
+        "X-RapidAPI-Key": process.env.RAPID_API_KEY,
+        'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
+      }
+    };
+    axios.request(options).then((response) => {
+      console.log(response.data);
+      const data = response.data
+      res.send(data)
+    })
+  } catch (error) {
+    handleServerError(error, req, res);
+  }
+};
+
 
 
 module.exports = {
   getExerciseListByEquipment,
   getExerciseListByTargetMuscle,
-  getAllExercises, getExercisesByPart
+  getAllExercises, getExercisesByPart,
+  getBodypart
 };
 

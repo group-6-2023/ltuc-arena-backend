@@ -45,10 +45,27 @@ const addExercise = (req, res) => {
     });
 };
 
+const addInfo = (req, res) => {
+  const info = req.body;
+  const sql = `INSERT INTO users (userName, profilePic, email)
+      VALUES('${info.userName}','${info.profilePic}' ,'${info.email}');`
+
+  client
+    .query(sql)
+    .then((data) => {
+      //const user = data.rows[0];
+      res.send("added su");
+    })
+    .catch((error) => {
+      handleServerError(error, req, res);
+    });
+};
+
 
 
 module.exports = {
   client,
   getExerciseForOneUser,
   addExercise,
+  addInfo,
 };
