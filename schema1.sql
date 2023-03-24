@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS userExercise (
     gifUrl VARCHAR(10000),
     bodyPart VARCHAR(10000),
     targetMuscle VARCHAR(10000),
-    equipment VARCHAR(10000)
+    equipment VARCHAR(10000),
+    weeksDay VARCHAR(10000)
   );
