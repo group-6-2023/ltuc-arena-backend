@@ -57,9 +57,40 @@ const addInfo = (req, res) => {
     });
 };
 
+
+
+const deleteExerciseHandlert = (req, res) => {
+
+  const info = req.params.UserId;
+  const sql = `DELETE FROM userExercise WHERE exerciseid= "${info}";`;
+  client.query(sql)
+    .then((result) => {
+      const sql = `SELECT * FROM userExercise `
+      client.query(sql)
+        .then((newResult) => {
+          res.send(newResult.rows)
+        })
+        .catch((error) => {
+          handleServerError(error, req, res)
+        })
+
+    })
+    .catch((error) => {
+      handleServerError(error, req, res)
+    })
+
+}
+
+
+
+
 module.exports = {
   client,
   getExerciseForOneUser,
   addExercise,
   addInfo,
+  deleteExerciseHandlert,
 };
+
+
+

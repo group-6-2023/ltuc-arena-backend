@@ -8,6 +8,7 @@ const {
   getExerciseForOneUser,
   addExercise,
   addInfo,
+  deleteExerciseHandlert,
 } = require("./controllers/database-func");
 
 const {
@@ -47,6 +48,8 @@ server.get("/allBodypart", getBodyPartList);
 server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
 server.post("/addExerciseForOneUser/:email", addExercise);
 server.post("/infoForOneUser", addInfo);
+server.delete("/deleteExercise/:UserId", deleteExerciseHandlert)
+
 ///////// error handling middleware to the server//////////////////
 server.use(handleServerError);
 server.use(handlePageNotFoundError);
