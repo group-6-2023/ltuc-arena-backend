@@ -7,8 +7,9 @@ const {
   client,
   getExerciseForOneUser,
   addExercise,
-  addInfo,
-  deleteExerciseHandlert,
+  addUser,
+  deleteExerciseHandler,
+  updateExerciseHandler,
 } = require("./controllers/database-func");
 
 const {
@@ -47,8 +48,9 @@ server.get("/allBodypart", getBodyPartList);
 ///////////////// DATABASE routes ///////////////////
 server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
 server.post("/addExerciseForOneUser/:email", addExercise);
-server.post("/infoForOneUser", addInfo);
-server.delete("/deleteExercise/:UserId", deleteExerciseHandlert)
+server.post("/infoForOneUser", addUser);
+server.delete("/deleteExercise/:exerciseid", deleteExerciseHandler);
+server.put("/updateExercise/:exerciseid", updateExerciseHandler);
 
 ///////// error handling middleware to the server//////////////////
 server.use(handleServerError);

@@ -65,7 +65,7 @@ const getAllExercises = (req, res) => {
 
 const getExercisesByPart = (req, res) => {
   try {
-    const bodypart = req.params.bodyPart;
+    const bodypart = req.params.bodypart;
 
     const options = {
       method: "GET",
@@ -89,14 +89,13 @@ const getBodyPartList = (req, res) => {
   try {
     const options = {
       method: "GET",
-      url: "https://exercisedb.p.rapidapi.com/bodyPartList",
+      url: "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
       headers: {
         "X-RapidAPI-Key": process.env.RAPID_API_KEY,
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
       },
     };
     axios.request(options).then((response) => {
-      console.log(response.data);
       const data = response.data;
       res.send(data);
     });

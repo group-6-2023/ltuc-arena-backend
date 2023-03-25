@@ -30,7 +30,7 @@ const addExercise = (req, res) => {
     .then((data) => {
       const user = data.rows[0];
       const sql = `INSERT INTO userExercise (userid, exerciseName, gifUrl, bodyPart, targetMuscle, equipment,weeksDay)
-      VALUES('${user.userid}','${exercise.exerciseName}' ,'${exercise.gifUrl}' ,'${exercise.bodyPart}','${exercise.targetMuscle}' , '${exercise.equipment}','${exercise.weeksDay}');`;
+      VALUES('${user.userid}','${exercise.exerciseName}','${exercise.gifUrl}','${exercise.bodyPart}','${exercise.targetMuscle}','${exercise.equipment}','${exercise.weeksDay}');`;
 
       client.query(sql).then((data) => {
         res.send(data.rows);
@@ -41,7 +41,7 @@ const addExercise = (req, res) => {
     });
 };
 
-const addInfo = (req, res) => {
+const addUser = (req, res) => {
   const info = req.body;
   const sql = `INSERT INTO users (userName, profilePic, email)
       VALUES('${info.userName}','${info.profilePic}' ,'${info.email}');`;
@@ -57,40 +57,44 @@ const addInfo = (req, res) => {
     });
 };
 
-
-
-const deleteExerciseHandlert = (req, res) => {
-
-  const info = req.params.UserId;
-  const sql = `DELETE FROM userExercise WHERE exerciseid= "${info}";`;
-  client.query(sql)
+const deleteExerciseHandler = (req, res) => {
+  const exerciseid = req.params.exerciseid;
+  const sql = `DELETE FROM userExercise WHERE exerciseid= ${exerciseid};`;
+  client
+    .query(sql)
     .then((result) => {
-      const sql = `SELECT * FROM userExercise `
-      client.query(sql)
-        .then((newResult) => {
-          res.send(newResult.rows)
-        })
-        .catch((error) => {
-          handleServerError(error, req, res)
-        })
-
+      const sql = `SELECT * FROM userExercise;`;
+      client.query(sql).then((newResult) => {
+        res.send(newResult.rows);
+      });
     })
     .catch((error) => {
-      handleServerError(error, req, res)
+      handleServerError(error, req, res);
+    });
+};
+
+const updateExerciseHandler = (req, res) => {
+  const exerciseId = req.params.exerciseid;
+  const newData = req.body;
+  const sql = `UPDATE userExercise SET weeksDay='${newData.weeksDay}' WHERE exerciseid =${exerciseId} RETURNING *; `;
+  client
+    .query(sql)
+    .then((data) => {
+      const sql = `SELECT * FROM userExercise;`;
+      client.query(sql).then((data) => {
+        res.send(data.rows);
+      });
     })
-
-}
-
-
-
+    .catch((err) => {
+      handleServerError(err, req, res);
+    });
+};
 
 module.exports = {
   client,
   getExerciseForOneUser,
   addExercise,
-  addInfo,
-  deleteExerciseHandlert,
+  addUser,
+  deleteExerciseHandler,
+  updateExerciseHandler,
 };
-
-
-
