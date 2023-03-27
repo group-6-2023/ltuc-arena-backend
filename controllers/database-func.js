@@ -41,6 +41,18 @@ const addExercise = (req, res) => {
     });
 };
 
+const getUsers = (req, res) => {
+  const sql = `SELECT * FROM users;`;
+  client
+    .query(sql)
+    .then((data) => {
+      res.send(data.rows);
+    })
+    .catch((err) => {
+      handleServerError(err, req, res);
+    });
+};
+
 const addUser = (req, res) => {
   const info = req.body;
   const sql = `INSERT INTO users (userName, profilePic, email)
@@ -97,4 +109,5 @@ module.exports = {
   addUser,
   deleteExerciseHandler,
   updateExerciseHandler,
+  getUsers,
 };

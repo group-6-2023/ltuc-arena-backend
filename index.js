@@ -10,6 +10,7 @@ const {
   addUser,
   deleteExerciseHandler,
   updateExerciseHandler,
+  getUsers,
 } = require("./controllers/database-func");
 
 const {
@@ -48,6 +49,7 @@ server.get("/allBodypart", getBodyPartList);
 ///////////////// DATABASE routes ///////////////////
 server.get("/exerciseForOneUser/:email", getExerciseForOneUser);
 server.post("/addExerciseForOneUser/:email", addExercise);
+server.get("/allUsers", getUsers);
 server.post("/infoForOneUser", addUser);
 server.delete("/deleteExercise/:exerciseid", deleteExerciseHandler);
 server.put("/updateExercise/:exerciseid", updateExerciseHandler);

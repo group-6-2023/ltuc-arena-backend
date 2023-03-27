@@ -54,7 +54,6 @@ const getAllExercises = (req, res) => {
       },
     };
     axios.request(options).then((response) => {
-      console.log(response.data);
       const data = response.data;
       res.send(data);
     });
