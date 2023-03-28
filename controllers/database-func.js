@@ -88,7 +88,7 @@ const deleteExerciseHandler = (req, res) => {
 const updateExerciseHandler = (req, res) => {
   const exerciseId = req.params.exerciseid;
   const newData = req.body;
-  const sql = `UPDATE userExercise SET weeksDay='${newData.weeksDay}' WHERE exerciseid =${exerciseId} RETURNING *; `;
+  const sql = `UPDATE userExercise SET weeksday='${newData.weeksDay}' WHERE exerciseid =${exerciseId} RETURNING *; `;
   client
     .query(sql)
     .then((data) => {
